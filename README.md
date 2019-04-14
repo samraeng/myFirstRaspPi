@@ -20,3 +20,12 @@ $ python3 main_module.py
 # Tools
 - [PuTTy](https://www.putty.org/)
 - [VS Code](https://code.visualstudio.com/)
+
+
+# Useful Git Commands
+
+```
+# Update current branch from upstream server
+$ git pull
+
+```
