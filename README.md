@@ -1,4 +1,4 @@
-# myFirstRaspPi
+# My First Raspberry Pi Project
 
 # Requirements
 - [Python 3.5.3](https://www.python.org/downloads/release/python-353/) This must include pip3
