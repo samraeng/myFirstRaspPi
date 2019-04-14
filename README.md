@@ -32,4 +32,10 @@ $ git pull
 $ git push
 $ git push -u origin {upstream server location}
 
+# Create new branch
+$ git checkout -b {new branch}
+
+# Checkout
+$ git checkout {target branch}
+
 ```
