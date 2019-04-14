@@ -28,4 +28,8 @@ $ python3 main_module.py
 # Update current branch from upstream server
 $ git pull
 
+# Push current branch to upstream server
+$ git push
+$ git push -u origin {upstream server location}
+
 ```
