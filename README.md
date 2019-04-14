@@ -20,3 +20,22 @@ $ python3 main_module.py
 # Tools
 - [PuTTy](https://www.putty.org/)
 - [VS Code](https://code.visualstudio.com/)
+
+
+# Useful Git Commands
+
+```
+# Update current branch from upstream server
+$ git pull
+
+# Push current branch to upstream server
+$ git push
+$ git push -u origin {upstream server location}
+
+# Create new branch
+$ git checkout -b {new branch}
+
+# Checkout
+$ git checkout {target branch}
+
+```
