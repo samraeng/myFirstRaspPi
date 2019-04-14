@@ -12,32 +12,49 @@ class MyObserver(Observer):
   def on_completed(self):
     print("on_completed")
 
+class CoinDispenser(Observer):
+  def on_next(self, coin):
+    print("dispense coin %s" % coin)
+
+  def on_error(self, error):
+    print("error")
+
+  def on_completed(self):
+    print("completed")
+
+class CoinLCDOutputObserver(Observer):
+  def on_next(self, coin):
+    print("display LCD %s" % coin)
+
+  def on_error(self, error):
+    print("error")
+
+  def on_completed(self):
+    print("completed")
 
 if __name__ == "__main__":
-  xs = Observable.from_iterable(range(10)).publish()
-  d = xs \
-      .map(lambda x: "Correct" if x == 45 else "In Correct") \
-      .subscribe(MyObserver())
 
-  # e = xs \
-  #     .map(lambda x: "non-delayed %s" % x) \
-  #     .subscribe(MyObserver())
+  def handleInterrupt(coin):
+    print("produce coin event")
 
-  powerEvent = Observable.from_callback()
+  coinEvents = Observable.from_list([5, 10, 5, 5, 10, 5]).publish()
 
-  it = Observable.interval(1000).publish()
 
-  processedXs = xs \
-    .map(lambda x: x * x) \
-    .filter(lambda x: x > 30) \
-    .reduce(lambda x, y: x + y, 0)
+  totalCoinEvent = Observable.from_iterable(range(6)) \
+    .flat_map(lambda r: coinEvents.take(r).reduce(lambda a, b: a + b, 0)) \
 
-  throttledSequences = processedXs.zip(it, lambda asx, ait: asx) \
-      .map(lambda x: "Throttled %s" % x) \
-      .subscribe(MyObserver())
+  totalCoinEvent.subscribe(CoinLCDOutputObserver())
 
-  xs.connect()
-  it.connect()
+  totalCoinEvent \
+    .filter(lambda x: x > 20) \
+    .subscribe(CoinDispenser())
+
+  totalCoinEvent \
+    .filter(lambda x: x == 20) \
+    .subscribe(StartMachine())
+
+  coinEvents.connect()
+
 
   print("before sleep")
   time.sleep(10)
